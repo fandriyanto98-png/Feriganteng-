@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🐱 Kucing Gokil Abis 😹</title>
+  <!-- Font lucu dari Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #fbe9f0 0%, #ffe6f0 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Comic Neue', cursive;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* hiasan bola-bola lucu di background */
+    .circle {
+      position: absolute;
+      background: rgba(255, 215, 245, 0.6);
+      border-radius: 50%;
+      z-index: 0;
+      filter: blur(8px);
+    }
+    .c1 { width: 250px; height: 250px; top: 10px; left: 10px; }
+    .c2 { width: 400px; height: 400px; bottom: -100px; right: -50px; background: rgba(255, 240, 150, 0.5); }
+    .c3 { width: 150px; height: 150px; top: 50%; left: 70%; background: #c7e9fb; }
+
+    .card {
+      position: relative;
+      z-index: 10;
+      max-width: 700px;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(6px);
+      border-radius: 60px 60px 40px 40px;
+      box-shadow: 0 20px 35px rgba(231, 120, 180, 0.3), 0 8px 15px rgba(0,0,0,0.1), inset 0 2px 10px #fff9;
+      padding: 30px 25px 40px 25px;
+      border: 5px solid white;
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: scale(1.01) rotate(0.5deg);
+    }
+
+    h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 3.3rem;
+      background: linear-gradient(135deg, #fd80b0, #b48aff, #6ed4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 4px 4px 0 #fff6d5, 6px 6px 0 rgba(255, 200, 230, 0.7);
+      margin-bottom: 5px;
+      letter-spacing: 2px;
+      text-align: center;
+      transform: rotate(-1deg);
+    }
+
+    .sub {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #b45faa;
+      background: #fffeda;
+      display: inline-block;
+      padding: 8px 30px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 0 #fbb0d0;
+      border: 2px dashed #ff86b3;
+      transform: rotate(1deg);
+    }
+
+    /* bingkai gambar kucing */
+    .image-frame {
+      background: #ffe8f5;
+      border-radius: 70px 70px 40px 40px;
+      padding: 25px 25px 20px 25px;
+      margin: 15px 0 20px;
+      box-shadow: inset 0 -5px 0 #d6a7c5, 0 15px 0 #ffbfd7;
+      border: 6px solid white;
+    }
+
+    #catImage {
+      width: 100%;
+      max-height: 450px;
+      object-fit: cover;
+      border-radius: 40px 40px 20px 20px;
+      box-shadow: 0 10px 0 #ac6f8b, 0 0 0 8px #fff9f0;
+      transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      cursor: pointer;
+      background-color: #fadadd;
+    }
+
+    #catImage:hover {
+      transform: scale(0.98) rotate(-1deg);
+      box-shadow: 0 6px 0 #ac6f8b, 0 0 0 10px #fffdde;
+    }
+
+    /* area fakta dan tombol */
+    .fact-box {
+      background: #fffaec;
+      border-radius: 50px;
+      padding: 20px 25px;
+      border: 4px solid white;
+      box-shadow: 0 8px 0 #feb0c5, inset 0 2px 20px #fff3cb;
+      margin: 25px 0 15px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #8b5a7c;
+      text-align: center;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      word-break: break-word;
+      line-height: 1.4;
+    }
+
+    .counter {
+      background: white;
+      border-radius: 40px;
+      padding: 10px 18px;
+      display: inline-block;
+      font-size: 1.4rem;
+      margin-right: 15px;
+      border: 3px solid #ffbfe0;
+      font-weight: bold;
+      color: #d46288;
+    }
+
+    .btn-cat {
+      background: #ffc2d9;
+      border: none;
+      color: #762b5a;
+      font-size: 2rem;
+      font-family: 'Fredoka One', cursive;
+      padding: 15px 30px 18px 30px;
+      border-radius: 50px;
+      box-shadow: 0 9px 0 #b45f8a, 0 4px 15px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: 0.07s linear;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      border: 3px solid white;
+      letter-spacing: 2px;
+    }
+
+    .btn-cat:active {
+      transform: translateY(7px);
+      box-shadow: 0 2px 0 #b45f8a;
+    }
+
+    .btn-cat:hover {
+      background: #ffd3e6;
+      transform: scale(1.02);
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 1.4rem;
+      color: #af7c9e;
+      background: #fff5db;
+      padding: 12px 30px;
+      border-radius: 60px;
+      border: 3px dotted #fd9ac1;
+      text-shadow: 2px 2px 0 #fff0f5;
+    }
+
+    .paw {
+      font-size: 2.2rem;
+      line-height: 1;
+      filter: drop-shadow(2px 4px 0 #f9acc7);
+    }
+
+    /* animasi loading sederhana */
+    .loading {
+      opacity: 0.6;
+      filter: blur(1px);
+      transition: 0.2s;
+    }
+
+    /* responsif */
+    @media (max-width: 500px) {
+      h1 { font-size: 2.7rem; }
+      .btn-cat { font-size: 1.8rem; padding: 12px 20px; }
+      .fact-box { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- hiasan lingkaran blur -->
+  <div class="circle c1"></div>
+  <div class="circle c2"></div>
+  <div class="circle c3"></div>
+
+  <div class="card">
+    <h1>😻 KUCING LUCU 😻</h1>
+    <div style="text-align: center;">
+      <span class="sub">gokil & imuut</span>
+    </div>
+
+    <!-- bingkai gambar -->
+    <div class="image-frame">
+      <img id="catImage" src="https://cataas.com/cat?random=init" alt="Kucing Lucu" crossorigin="anonymous">
+    </div>
+
+    <!-- kotak fakta kucing (diisi via javascript) -->
+    <div class="fact-box" id="factDisplay">
+      🐾 nge-meow dulu... 🐾
+    </div>
+
+    <!-- area counter + tombol -->
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 20px;">
+      <span class="counter" id="clickCounter">🐱 0</span>
+      <button class="btn-cat" id="newCatBtn">
+        <span class="paw">🐾</span> MEOW! <span class="paw">🐾</span>
+      </button>
+    </div>
+
+    <!-- footer lucu -->
+    <div class="footer">
+      ⚡ dibuat dengan cakar & 🧶 benang ⚡
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // elemen-elemen yang diperlukan
+      const catImage = document.getElementById('catImage');
+      const factDisplay = document.getElementById('factDisplay');
+      const clickCounterSpan = document.getElementById('clickCounter');
+      const newCatBtn = document.getElementById('newCatBtn');
+
+      // inisialisasi counter
+      let clickCount = 0;
+      updateCounterDisplay();
+
+      // array fakta kucing lokal (biar lucu dan ringan, bisa juga pakai API, tapi tambahin sendiri biar gemes)
+      const localFacts = [
+        "😸 Kucing bisa mendengar suara ultrasonik, tapi pura-pura tuli kalau dipanggil mandi.",
+        "😺 1 tahun kucing = 15 tahun manusia, makannya suka lebay kayak remaja.",
+        "😻 Kucing menghabiskan 70% hidupnya untuk tidur. Sisanya untuk ngeong minta makan tengah malam.",
+        "😿 Kucing punya 32 otot di telinga, bisa muter 180°, cocok buat ngupingin kamu buka snack.",
+        "🙀 Kucing nggak bisa merasakan rasa manis, tapi jago banget bikin hati manis.",
+        "😼 Kucing sering menggosokkan kepala buat nandain kamu sebagai budaknya.",
+        "😽 Dengkuran kucing (purring) punya frekuensi 20-140 Hz yang katanya bisa nyembuhin tulang retak. Coba aja.",
+        "😾 Kucing tercepat di dunia bisa lari 48 km/jam — biasanya buat kabur habis jatuhin vas bunga.",
+        "😿 Kalau kucing kasih kamu 'hadiah' berupa tikus mati, itu artinya dia pikir kamu nggak bisa berburu. Kasihan.",
+        "😻 Kucing punya 'eyelid ketiga' (membrana niktitans) buat melindungi mata, biar keliatan selalu misterius.",
+        "😸 Ekor kucing tegak berarti dia happy. Ekor mengembang berarti siap perang dunia III.",
+        "😺 Kucing bisa minum air laut karena ginjalnya super, tapi tetap aja lebih milih air gelas kamu.",
+        "😽 Kucing betina biasanya lebih suka jadi 'bos' dan nyakar kalau diganggu. Respect.",
+        "😿 Kucing punya sekitar 20-150 juta sel penciuman — bisa nyium ikan asin dari rumah tetangga."
+      ];
+
+      // fungsi ambil fakta acak dari array lokal
+      function getRandomLocalFact() {
+        const randomIndex = Math.floor(Math.random() * localFacts.length);
+        return localFacts[randomIndex];
+      }
+
+      // fungsi untuk memperbarui counter di layar
+      function updateCounterDisplay() {
+        clickCounterSpan.textContent = `🐱 ${clickCount}`;
+      }
+
+      // fungsi untuk mengambil gambar baru dengan timestamp anti-cache
+      function fetchNewCatImage() {
+        // tambah parameter timestamp agar selalu dapet gambar baru
+        const timestamp = Date.now();
+        catImage.src = `https://cataas.com/cat?random=${timestamp}`;
+        
+        // efek loading (opsional)
+        catImage.classList.add('loading');
+        // hilangin loading setelah gambar dimuat
+        catImage.onload = function() {
+          catImage.classList.remove('loading');
+        };
+        catImage.onerror = function() {
+          catImage.classList.remove('loading');
+          factDisplay.innerHTML = "😿 Waduh kucingnya kabur. Coba klik lagi! 😿";
+        };
+      }
+
+      // fungsi utama saat tombol ditekan: ganti gambar, fakta, counter +1
+      function handleNewCat() {
+        // tambah hitungan
+        clickCount++;
+        updateCounterDisplay();
+
+        // ganti gambar
+        fetchNewCatImage();
+
+        // ganti fakta (pake lokal biar cepet & lucu)
+        const randomFact = getRandomLocalFact();
+        factDisplay.textContent = randomFact;
+
+        // efek kecil: ubah background factbox sebentar
+        factDisplay.style.transition = 'background 0.2s';
+        factDisplay.style.background = '#fff2b5';
+        setTimeout(() => {
+          factDisplay.style.background = '#fffaec';
+        }, 200);
+      }
+
+      // pasang event listener ke tombol
+      newCatBtn.addEventListener('click', handleNewCat);
+
+      // biar gambar bisa diklik juga buat ganti (tambah seru)
+      catImage.addEventListener('click', handleNewCat);
+
+      // set fakta pertama saat halaman dimuat (biar nggak kosong)
+      // kita tunggu gambar awal dimuat? langsung set aja
+      window.addEventListener('load', function() {
+        // beri fakta awal random
+        factDisplay.textContent = getRandomLocalFact();
+        // pastikan gambar awal fresh (tambah timestamp)
+        catImage.src = `https://cataas.com/cat?random=${Date.now()}`;
+      });
+
+      // tambahan: handling error gambar
+      catImage.onerror = function() {
+        catImage.classList.remove('loading');
+        factDisplay.innerHTML = "😿 Kucingnya malu-malu, sentuh tombol buat panggil 😿";
+        // fallback gambar dari placekitten (biar tetap ada kucing)
+        catImage.src = `https://placekitten.com/600/400?image=${Math.floor(Math.random()*16)}`;
+      };
+
+      // suka-suka: update fakta juga saat gambar error? nggakapa
+    })();
+  </script>
+</body>
+</html>
